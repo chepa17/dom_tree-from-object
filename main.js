@@ -1,4 +1,4 @@
-let data = {
+const list = {
   "Рыбы": {
       "форель": {},
       "лосось": {}
@@ -14,20 +14,23 @@ let data = {
       }
   }
 };
-const formatDataIntoHTMLList = function(data) {
+const div = document.getElementById('tree');
+
+const formatDataIntoHTMLList = function(dat) {
   const ul = document.createElement('ul');
-  for (let item in data) {
+  for (let item in dat) {
       const li = document.createElement('li');
-      console.log(item);
       li.textContent = `${item}`;
-      if (typeof data[item] === 'object') {
-          li.append(formatDataIntoHTMLList(data[item]));
+      if (typeof dat[item] === 'object') {
+          li.append(formatDataIntoHTMLList(dat[item]));
       }
       ul.append(li);
   }
   return ul;
 }
-function createTree(container, data) {
-  container.append(formatDataIntoHTMLList(data));
+
+function createTree(container, dataForTransform) {
+  container.append(formatDataIntoHTMLList(dataForTransform));
 }
-createTree(document.getElementById('tree'), data);
+
+createTree(div, list);
